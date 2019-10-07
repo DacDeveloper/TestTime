@@ -4,10 +4,14 @@ var app = Express();
 
 
 
-var port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log("Server listening on port " + port);
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
+var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
+ 
+
+app.listen(server_port, server_ip_address, function () {
+  console.log( "Listening on " + server_ip_address + ", port " + server_port )
 });
+
 
 app.get("/time", (request, response) => {
 	var today = new Date();
